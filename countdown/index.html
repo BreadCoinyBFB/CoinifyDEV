@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Countdown | Coinify</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="countdown-container">
+    <h2>COUNTDOWN:</h2>
+    <p id="days">DAYS: 54</p>
+    <p id="hours">HOUR: 11</p>
+    <p id="minutes">MINUTES: 36</p>
+    <p id="seconds">SECONDS: 59</p>
+    <p id="milliseconds">MILLISECONDS: 999</p>
+  </div>
 
+  <script>
+    // Starting countdown values
+    let days = 54;
+    let hours = 11;
+    let minutes = 36;
+    let seconds = 59;
+    let milliseconds = 999;
+
+    function updateCountdown() {
+      milliseconds--;
+
+      if (milliseconds < 0) {
+        milliseconds = 999;
+        seconds--;
+      }
+      if (seconds < 0) {
+        seconds = 59;
+        minutes--;
+      }
+      if (minutes < 0) {
+        minutes = 59;
+        hours--;
+      }
+      if (hours < 0) {
+        hours = 23;
+        days--;
+      }
+
+      // When all reach 0
+      if (days < 0) {
+        document.querySelector(".countdown-container").innerHTML = "<h2>COUNTDOWN FINISHED</h2>";
+        clearInterval(timer);
+        return;
+      }
+
+      document.getElementById("days").innerText = "DAYS: " + days;
+      document.getElementById("hours").innerText = "HOUR: " + hours;
+      document.getElementById("minutes").innerText = "MIN
