@@ -51,7 +51,7 @@ button {
   height: 50px;
   display: block;
   transition: 0.3s;
-  align: center;
+  align-items: center;
 }
 
 /* 🔸 Hover effect */
