@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +10,8 @@
   <div class="countdown-container">
     <h2>COUNTDOWN:</h2>
     <p id="days">DAYS: 54</p>
-    <p id="hours">HOUR: 11</p>
-    <p id="minutes">MINUTES: 36</p>
+    <p id="hours">HOUR: 3</p>
+    <p id="minutes">MINUTES: 24</p>
     <p id="seconds">SECONDS: 59</p>
     <p id="milliseconds">MILLISECONDS: 999</p>
   </div>
@@ -20,16 +19,17 @@
   <script>
     // Starting countdown values
     let days = 54;
-    let hours = 11;
-    let minutes = 36;
+    let hours = 3;
+    let minutes = 24;
     let seconds = 59;
     let milliseconds = 999;
 
+    // Update function
     function updateCountdown() {
-      milliseconds--;
+      milliseconds -= 10; // subtract faster (10ms per frame)
 
       if (milliseconds < 0) {
-        milliseconds = 999;
+        milliseconds = 990;
         seconds--;
       }
       if (seconds < 0) {
@@ -41,17 +41,18 @@
         hours--;
       }
       if (hours < 0) {
-        hours = 23;
+        hours = 3;
         days--;
       }
 
-      // When all reach 0
+      // End condition
       if (days < 0) {
         document.querySelector(".countdown-container").innerHTML = "<h2>COUNTDOWN FINISHED</h2>";
         clearInterval(timer);
         return;
       }
 
+      // Update displayed values
       document.getElementById("days").innerText = "DAYS: " + days;
       document.getElementById("hours").innerText = "HOUR: " + hours;
       document.getElementById("minutes").innerText = "MINUTES: " + minutes;
@@ -59,7 +60,8 @@
       document.getElementById("milliseconds").innerText = "MILLISECONDS: " + milliseconds;
     }
 
-    const timer = setInterval(updateCountdown, 1);
+    // Update every 10 milliseconds for realistic speed
+    const timer = setInterval(updateCountdown, 10);
   </script>
 </body>
 </html>
