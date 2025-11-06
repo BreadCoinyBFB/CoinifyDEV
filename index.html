@@ -16,15 +16,20 @@
   </h2>
   <h3>Version 0.1</h3>
 
-  <button id="howcoinifyworks">How Coinify Works </button>
-  <button id="countdown">Countdown </button>
+<button id="howcoinifyworks">How Coinify Works</button>
+<button id="countdown">Countdown</button>
 
-  <!-- Script that makes the button open the subpage -->
-  <script>
-    document.getElementById("howcoinifyworks").onclick = function() {
-      window.location.href = "howcoinifyworks/index.html";
-      document.getElementById("countdown").onclick = function() {
-      window.location.href = "countdown/index.html";
+<script>
+  // Button 1 → Goes to How Coinify Works page
+  document.getElementById("howcoinifyworks").onclick = function() {
+    window.location.href = "howcoinifyworks/index.html";
+  };
+
+  // Button 2 → Goes to Test Page
+  document.getElementById("countdown").onclick = function() {
+    window.location.href = "countdown/index.html"; // <– create this folder and index.html later
+  };
+</script>
     };
   </script>
 </body>
