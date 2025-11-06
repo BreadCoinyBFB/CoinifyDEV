@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,4 +54,12 @@
 
       document.getElementById("days").innerText = "DAYS: " + days;
       document.getElementById("hours").innerText = "HOUR: " + hours;
-      document.getElementById("minutes").innerText = "MIN
+      document.getElementById("minutes").innerText = "MINUTES: " + minutes;
+      document.getElementById("seconds").innerText = "SECONDS: " + seconds;
+      document.getElementById("milliseconds").innerText = "MILLISECONDS: " + milliseconds;
+    }
+
+    const timer = setInterval(updateCountdown, 1);
+  </script>
+</body>
+</html>
