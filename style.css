@@ -58,5 +58,4 @@ button {
 button:hover {
   background-color: orange;
   color: black;
-  transform: scale(1.03);
 }
