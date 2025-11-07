@@ -4,43 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Countdown | Coinify</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div class="countdown-container">
     <h2>COUNTDOWN:</h2>
     <p id="days">DAYS: 53</p>
-    <p id="hours">HOUR: 4</p>
-    <p id="minutes">MINUTES: 7</p>
+    <p id="hours">HOUR: 5</p>
+    <p id="minutes">MINUTES: 30</p>
     <p id="seconds">SECONDS: 59</p>
     <p id="milliseconds">MILLISECONDS: 999</p>
   </div>
 
-  <!-- hidden countdown script -->
   <script>
   (function() {
-    let totalMs = localStorage.getItem("remainingTime");
-    if (!totalMs) {
-      totalMs = (((53 * 24 + 4) * 60 + 7) * 60 + 59) * 1000 + 999;
+    // Check if a previous target time exists
+    let endTime = localStorage.getItem("countdownEndTime");
+
+    // If not, create one starting from now + initial countdown duration
+    if (!endTime) {
+      const start = Date.now();
+      const duration =
+        (((53 * 24 + 5) * 60 + 30) * 60 + 59) * 1000 + 999; // your initial time
+      endTime = start + duration;
+      localStorage.setItem("countdownEndTime", endTime);
     } else {
-      totalMs = parseInt(totalMs);
+      endTime = parseInt(endTime);
     }
 
-    let last = performance.now();
+    function updateCountdown() {
+      const now = Date.now();
+      let remaining = endTime - now;
 
-    function tick(now) {
-      const delta = now - last;
-      last = now;
-      totalMs -= delta;
-      if (totalMs <= 0) {
-        document.querySelector(".countdown-container").innerHTML = "<h2>COUNTDOWN FINISHED</h2>";
-        localStorage.removeItem("remainingTime");
+      if (remaining <= 0) {
+        document.querySelector(".countdown-container").innerHTML =
+          "<h2>COUNTDOWN FINISHED</h2>";
+        localStorage.removeItem("countdownEndTime");
         return;
       }
 
-      localStorage.setItem("remainingTime", Math.floor(totalMs));
-
-      let ms = totalMs;
+      let ms = remaining;
       const days = Math.floor(ms / (1000 * 60 * 60 * 24)); ms %= 86400000;
       const hours = Math.floor(ms / (1000 * 60 * 60)); ms %= 3600000;
       const minutes = Math.floor(ms / (1000 * 60)); ms %= 60000;
@@ -50,12 +53,13 @@
       document.getElementById("hours").textContent = "HOUR: " + hours;
       document.getElementById("minutes").textContent = "MINUTES: " + minutes;
       document.getElementById("seconds").textContent = "SECONDS: " + seconds;
-      document.getElementById("milliseconds").textContent = "MILLISECONDS: " + Math.floor(ms);
+      document.getElementById("milliseconds").textContent =
+        "MILLISECONDS: " + Math.floor(ms);
 
-      requestAnimationFrame(tick);
+      requestAnimationFrame(updateCountdown);
     }
 
-    requestAnimationFrame(tick);
+    requestAnimationFrame(updateCountdown);
   })();
   </script>
 </body>
