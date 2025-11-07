@@ -4,35 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Countdown | Coinify</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #111;
-      color: #0f0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .countdown-container p {
-      margin: 4px;
-      font-size: 20px;
-    }
-  </style>
 </head>
 <body>
   <div class="countdown-container">
     <h2>COUNTDOWN:</h2>
     <p id="days">DAYS: 53</p>
-    <p id="hours">HOUR: 6</p>
-    <p id="minutes">MINUTES: 2</p>
+    <p id="hours">HOUR: 5</p>
+    <p id="minutes">MINUTES: 30</p>
     <p id="seconds">SECONDS: 59</p>
     <p id="milliseconds">MILLISECONDS: 999</p>
   </div>
 
   <script>
-    let days = 54, hours = 11, minutes = 36, seconds = 59, milliseconds = 999;
+    let days = 53, hours = 5, minutes = 30, seconds = 59, milliseconds = 999;
     let last = performance.now();
 
     function updateCountdown(now) {
