@@ -1,67 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Countdown | Coinify</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="countdown-container">
-    <h2>COUNTDOWN:</h2>
-    <p id="days">DAYS: 54</p>
-    <p id="hours">HOUR: 3</p>
-    <p id="minutes">MINUTES: 24</p>
-    <p id="seconds">SECONDS: 59</p>
-    <p id="milliseconds">MILLISECONDS: 999</p>
-  </div>
+<script>
+  // Check if we already have an end time saved
+  let savedEndTime = localStorage.getItem("coinifyCountdownEndTime");
 
-  <script>
-    // Starting countdown values
-    let days = 54;
-    let hours = 3;
-    let minutes = 24;
-    let seconds = 59;
-    let milliseconds = 999;
+  // Set starting time (in milliseconds)
+  let totalTime = (((53 * 24 * 60 * 60) + (5 * 60 * 60) + (6 * 60) + 59) * 1000) + 999;
 
-    // Update function
-    function updateCountdown() {
-      milliseconds -= 10; // subtract faster (10ms per frame)
+  // If there's no saved end time, create one
+  if (!savedEndTime) {
+    savedEndTime = Date.now() + totalTime;
+    localStorage.setItem("coinifyCountdownEndTime", savedEndTime);
+  } else {
+    savedEndTime = parseInt(savedEndTime);
+  }
 
-      if (milliseconds < 0) {
-        milliseconds = 990;
-        seconds--;
-      }
-      if (seconds < 0) {
-        seconds = 59;
-        minutes--;
-      }
-      if (minutes < 0) {
-        minutes = 59;
-        hours--;
-      }
-      if (hours < 0) {
-        hours = 3;
-        days--;
-      }
+  // Function to update countdown
+  function updateCountdown() {
+    let distance = savedEndTime - Date.now();
 
-      // End condition
-      if (days < 0) {
-        document.querySelector(".countdown-container").innerHTML = "<h2>COUNTDOWN FINISHED</h2>";
-        clearInterval(timer);
-        return;
-      }
-
-      // Update displayed values
-      document.getElementById("days").innerText = "DAYS: " + days;
-      document.getElementById("hours").innerText = "HOUR: " + hours;
-      document.getElementById("minutes").innerText = "MINUTES: " + minutes;
-      document.getElementById("seconds").innerText = "SECONDS: " + seconds;
-      document.getElementById("milliseconds").innerText = "MILLISECONDS: " + milliseconds;
+    if (distance <= 0) {
+      document.querySelector(".countdown-container").innerHTML = "<h2>COUNTDOWN FINISHED</h2>";
+      localStorage.removeItem("coinifyCountdownEndTime");
+      clearInterval(timer);
+      return;
     }
 
-    // Update every 10 milliseconds for realistic speed
-    const timer = setInterval(updateCountdown, 10);
-  </script>
-</body>
-</html>
+    // Convert distance into readable format
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    let milliseconds = Math.floor(distance % 1000);
+
+    // Update display
+    document.getElementById("days").innerText = "DAYS: " + days;
+    document.getElementById("hours").innerText = "HOUR: " + hours;
+    document.getElementById("minutes").innerText = "MINUTES: " + minutes;
+    document.getElementById("seconds").innerText = "SECONDS: " + seconds;
+    document.getElementById("milliseconds").innerText = "MILLISECONDS: " + milliseconds;
+  }
+
+  // Run every 10 milliseconds
+  const timer = setInterval(updateCountdown, 10);
+</script>
