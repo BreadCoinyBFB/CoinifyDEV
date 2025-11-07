@@ -10,8 +10,8 @@
   <div class="countdown-container">
     <h2>COUNTDOWN:</h2>
     <p id="days">DAYS: 53</p>
-    <p id="hours">HOUR: 5</p>
-    <p id="minutes">MINUTES: 30</p>
+    <p id="hours">HOUR: 4</p>
+    <p id="minutes">MINUTES: 52</p>
     <p id="seconds">SECONDS: 59</p>
     <p id="milliseconds">MILLISECONDS: 999</p>
   </div>
@@ -25,7 +25,7 @@
     if (!endTime) {
       const start = Date.now();
       const duration =
-        (((53 * 24 + 5) * 60 + 30) * 60 + 59) * 1000 + 999; // your initial time
+        (((53 * 24 + 4) * 60 + 52) * 60 + 59) * 1000 + 999; // your initial time
       endTime = start + duration;
       localStorage.setItem("countdownEndTime", endTime);
     } else {
