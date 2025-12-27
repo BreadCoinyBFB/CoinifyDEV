@@ -47,6 +47,7 @@ body {
   gap: 16px;
   transition: left 0.25s ease;
   z-index: 1000;
+  color: #ffffff;
 }
 
 .side-menu a {
@@ -83,7 +84,7 @@ body {
 .hero-card {
   width: 100%;
   max-width: 420px;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-image {
@@ -102,9 +103,11 @@ h1 {
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 8px;
+  color: #ffffff;
 }
 
 .date {
   font-size: 22px;
   font-weight: 500;
+  color: #ffffff;
 }
