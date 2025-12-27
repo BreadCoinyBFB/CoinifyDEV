@@ -1,37 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coinify Developer Release</title>
-  <link rel="stylesheet" href="style.css">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coinify</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Coinify Developer Release</h1>
-  <p>Welcome to Coinify (CoinifyBCB)!</p>
-  <h2>
-    Coinify, also known as "CoinifyBCB", is created by BreadCoinyBFB.  
-    It’s still in Developer Release (Version 0.1). Not a game btw.  
-    Stay tuned for updates!
-  </h2>
-  <h3>Version 0.2</h3>
 
-<button id="howcoinifyworks">How Coinify Works</button>
-<button id="countdown">Countdown</button>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <div class="logo">Coinify</div>
+  </header>
 
-<script>
-  // Button 1 → Goes to How Coinify Works page
-  document.getElementById("howcoinifyworks").onclick = function() {
-    window.location.href = "howcoinifyworks/index.html";
-  };
+  <!-- Side Menu -->
+  <nav class="side-menu" id="sideMenu">
+    <a href="#">Home</a>
+    <a href="#">How Coinify Works</a>
+    <a href="#">Countdown</a>
+    <a href="#">About</a>
+  </nav>
 
-  // Button 2 → Goes to Test Page
-  document.getElementById("countdown").onclick = function() {
-    window.location.href = "countdown/index.html"; // <– create this folder and index.html later
-  };
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Main Content -->
+  <main class="hero">
+    <div class="hero-card">
+      <div class="hero-image">
+        <img src="soon.png" alt="Coming Soon">
+      </div>
+
+      <h1>Soon.</h1>
+      <p class="date">At December 30</p>
+    </div>
+
+    <!-- ========================= -->
+    <!-- COUNTDOWN (UNCHANGED) -->
+    <!-- ========================= -->
+    <!-- PASTE YOUR EXISTING COUNTDOWN HERE -->
+
+    <!-- ========================= -->
+    <!-- HOW COINIFY WORKS (UNCHANGED) -->
+    <!-- ========================= -->
+    <!-- PASTE YOUR SECTION HERE -->
+
+  </main>
+
+  <!-- Menu Script (SAFE & SIMPLE) -->
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const sideMenu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
+
+    function toggleMenu() {
+      sideMenu.classList.toggle("open");
+      overlay.classList.toggle("show");
+    }
+
+    menuBtn.addEventListener("click", toggleMenu);
+    overlay.addEventListener("click", toggleMenu);
   </script>
+
 </body>
 </html>
