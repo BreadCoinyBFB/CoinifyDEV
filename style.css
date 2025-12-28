@@ -65,7 +65,7 @@ body {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  color: #ff4d00;
   display: none;
   z-index: 900;
 }
