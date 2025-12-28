@@ -47,7 +47,7 @@ body {
   gap: 16px;
   transition: left 0.25s ease;
   z-index: 1000;
-  color: #ffffff;
+  color: #ff4d00;
 }
 
 .side-menu a {
