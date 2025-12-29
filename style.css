@@ -31,7 +31,7 @@ body {
   font-size: 28px;
   background: transparent;   /* transparent background */
   border: none;              /* no border */
-  color: #fff;               /* white ☰ */
+  color: #ffffff;               /* white ☰ */
   cursor: pointer;
   position: fixed;
   top: 15px;
