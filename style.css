@@ -27,14 +27,17 @@ body {
   .logo {
     font-size: 16px; /* shrink text on mobile */
   }
-  .menu-btn {
-    font-size: 24px; /* slightly smaller button */
-    background: none;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-    position: fixed;
-  }
+
+.menu-btn {
+  font-size: 28px;
+  background: transparent;   /* transparent background */
+  border: none;              /* no border */
+  color: #fff;               /* white ☰ */
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
 }
 
 /* Side menu */
