@@ -11,25 +11,25 @@ body {
 .topbar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between; /* pushes logo and button apart */
   padding: 14px 18px;
 }
 
-.menu-btn {
-  font-size: 28px;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  z-index: 1001;
-}
-
+/* Logo */
 .logo {
   font-size: 20px;
   font-weight: 600;
+  white-space: nowrap; /* prevent wrapping */
+}
+
+/* Responsive fix for small screens */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 16px; /* shrink text on mobile */
+  }
+  .menu-btn {
+    font-size: 24px; /* slightly smaller button */
+  }
 }
 
 /* Side menu */
