@@ -28,31 +28,63 @@ body {
   font-weight: 600;
 }
 
+/* Header with menu */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1001;
+}
+
+/* Hamburger icon */
+.menu-btn {
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+  z-index: 1002; /* above everything */
+}
+
+/* Site title */
+.site-title {
+  color: #fff;
+  font-size: 24px;
+  margin-left: 10px;
+}
+
 /* Side menu */
 .side-menu {
   height: 100%;
   width: 55%;
   position: fixed;
   top: 0;
-  left: -55%;
-  background-color: #a0522d; /* menu color */
+  left: 0;
+  background-color: #a0522d;
   overflow-x: hidden;
-  transition: 0.3s;
-  padding-top: 60px;        /* push menu content down */
-  z-index: 999;             /* ensure menu is above all */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  padding-top: 60px;
+  z-index: 1000;
+}
+
+/* Open state */
+.side-menu.open {
+  transform: translateX(0);
 }
 
 /* Menu links */
 .side-menu a {
   display: block;
-  padding: 20px 30px;       /* more spacing from top */
+  padding: 20px 30px;
   text-decoration: none;
   font-size: 22px;
   color: #fff;
-  transition: 0.3s;
 }
 
-/* Close button inside menu */
+/* Close button */
 .close-btn {
   background: transparent;
   border: none;
@@ -60,19 +92,16 @@ body {
   font-size: 28px;
   cursor: pointer;
   position: absolute;
-  top: 15px;        /* move a bit down */
-  left: 15px;       /* move a bit right */
+  top: 15px;
+  left: 15px;
   padding: 0;
   line-height: 1;
-  z-index: 1000;    /* above everything */
 }
 
-/* Hamburger menu (three lines) */
-.menu-btn {
-  font-size: 28px;
-  cursor: pointer;
-  z-index: 1001;    /* ensure it's above side menu */
-  position: relative;
+/* Main content spacing */
+.main-content {
+  margin-top: 70px; /* account for fixed header */
+  padding: 0 20px;
 }
 
 .side-menu.open {
