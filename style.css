@@ -30,14 +30,20 @@ body {
 
 .menu-btn {
   font-size: 28px;
-  background: none;        /* remove background */
-  border: none;            /* remove border */
   color: #fff;             /* white ☰ */
   cursor: pointer;
   position: fixed;
   top: 15px;
   left: 15px;
   z-index: 1001;
+
+  /* No background, no border */
+  background: transparent;
+  border: none;
+
+  /* Ensure it behaves like text, not a button */
+  display: inline-block;
+  line-height: 1;
 }
 
 /* Side menu */
