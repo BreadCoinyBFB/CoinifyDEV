@@ -38,12 +38,7 @@ body {
   top: 15px;
   left: 15px;
   z-index: 1001;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding: 0;              /* remove default padding */
-  margin: 0;               /* remove default margin */
-  line-height: 1;          /* tighten spacing */
-  }
+}
 
 /* Side menu */
 .side-menu {
