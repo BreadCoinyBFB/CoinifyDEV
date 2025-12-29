@@ -16,27 +16,20 @@ body {
 }
 
 .menu-btn {
-  font-size: 26px;
+  font-size: 28px;
   background: none;
   border: none;
   color: #fff;
   cursor: pointer;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
 }
 
 .logo {
   font-size: 20px;
   font-weight: 600;
-}
-
-/* Hamburger menu (three lines) */
-.menu-btn {
-  font-size: 28px;
-  cursor: pointer;
-  z-index: 1001;         /* always on top */
-  position: fixed;        /* stick to top-left always */
-  top: 15px;
-  left: 15px;
-  color: #fff;
 }
 
 /* Side menu */
@@ -50,10 +43,14 @@ body {
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 60px;
-  z-index: 1000;          /* below hamburger icon */
+  z-index: 1000;
 }
 
-/* Close button inside menu */
+.side-menu.open {
+  left: 0;
+}
+
+/* Close button */
 .close-btn {
   background: transparent;
   border: none;
@@ -62,10 +59,10 @@ body {
   cursor: pointer;
   position: absolute;
   top: 15px;
-  right: 15px;            /* move X to top-right inside menu */
+  right: 15px;
   padding: 0;
   line-height: 1;
-  z-index: 1001;           /* above menu links */
+  z-index: 1001;
 }
 
 /* Menu links */
@@ -78,26 +75,13 @@ body {
   transition: 0.3s;
 }
 
-/* Main content sections */
+/* Main content */
 .main-content {
-  padding: 80px 20px 20px 20px;  /* top padding for menu icon + spacing */
-}
-
-.countdown-container, .how-coinify {
-  margin-bottom: 40px;   /* space between sections */
-}
-
-/* Main content spacing */
-.main-content {
-  margin-top: 70px; /* account for fixed header */
+  margin-top: 70px;
   padding: 0 20px;
 }
 
-.side-menu.open {
-  left: 0;
-}
-
-/* Hero */
+/* Hero section */
 .hero {
   display: flex;
   flex-direction: column;
@@ -132,6 +116,4 @@ h1 {
 .date {
   font-size: 22px;
   font-weight: 500;
-}
-
 }
