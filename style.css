@@ -29,6 +29,11 @@ body {
   }
   .menu-btn {
     font-size: 24px; /* slightly smaller button */
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    position: fixed;
   }
 }
 
