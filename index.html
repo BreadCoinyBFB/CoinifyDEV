@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,51 +7,52 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <!-- Top Bar -->
   <header class="topbar">
-    <button class="menu-btn" id="menuBtn">☰</button>
-    <div class="logo">Coinify</div>
-  </header>
+  <!-- Single working ☰ button -->
+  <button class="menu-btn" id="menuBtn">&#9776;</button>
+  <div class="logo">Coinify</div>
+</header>
 
-  <!-- Side Menu -->
+<!-- Side Menu -->
   <nav class="side-menu" id="sideMenu">
-    <button class="close-btn" id="closeBtn">✕</button>
-
+    <button class="close-btn" id="closeBtn">&#10005;</button>
     <a href="#countdown">Countdown</a>
-    <a href="#how">How Coinify Works?</a>
+    <a href="#howcoinifyworks">How Coinify Works?</a>
   </nav>
 
   <!-- Main Content -->
-    <main class="hero">
-    <div class="hero-card">
-      <div class="hero-image">
-        <img src="soon.png" alt="Coming Soon">
+  <main class="main-content">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-image">
+          <img src="soon.png" alt="Coming Soon" />
+        </div>
+        <h1>Soon.</h1>
+        <p class="date">At December 30</p>
       </div>
+    </section>
+  </main><header class="topbar">
+  <!-- Single working ☰ button -->
+  <button class="menu-btn" id="menuBtn">&#9776;</button>
+  <div class="logo">Coinify</div>
+</header>
 
-      <h1>Soon.</h1>
-      <p class="date">At December 30</p>
-
-      <div class="header">
-  <span class="menu-btn" onclick="openMenu()">&#9776;</span>
-  <span class="site-title">Coinify</span>
- </div>
-
-<div class="main-content">
-  </div>
-    </div>
-    <!-- EVERYTHING BELOW REMAINS UNTOUCHED -->
-  </main>
+<!-- Side Menu -->
+<nav class="side-menu" id="sideMenu">
+  <button class="close-btn" id="closeBtn">&#10005;</button>
+  <a href="#countdown">Countdown</a>
+  <a href="#how">How Coinify Works?</a>
+</nav>
 
   <!-- Menu Script -->
   <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const closeBtn = document.getElementById("closeBtn");
-    const sideMenu = document.getElementById("sideMenu");
+  const menuBtn = document.getElementById("menuBtn");
+  const closeBtn = document.getElementById("closeBtn");
+  const sideMenu = document.getElementById("sideMenu");
 
-    menuBtn.onclick = () => sideMenu.classList.add("open");
-    closeBtn.onclick = () => sideMenu.classList.remove("open");
+  menuBtn.onclick = () => sideMenu.classList.add("open");
+  closeBtn.onclick = () => sideMenu.classList.remove("open");
   </script>
-
 </body>
 </html>
