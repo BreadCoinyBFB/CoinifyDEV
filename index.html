@@ -3,22 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coinify</title>
+  <title>CoinifyDEV</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Top Bar -->
   <header class="topbar">
-  <!-- Single working ☰ button -->
-  <button class="menu-btn" id="menuBtn">&#9776;</button>
-  <div class="logo">Coinify</div>
-</header>
+    <button class="menu-btn" id="menuBtn">&#9776;</button>
+    <div class="logo">Coinify</div>
+  </header>
 
-<!-- Side Menu -->
+  <!-- Side Menu -->
   <nav class="side-menu" id="sideMenu">
     <button class="close-btn" id="closeBtn">&#10005;</button>
     <a href="#countdown">Countdown</a>
-    <a href="#howcoinifyworks">How Coinify Works?</a>
+    <a href="#how">How Coinify Works?</a>
   </nav>
 
   <!-- Main Content -->
@@ -32,27 +31,16 @@
         <p class="date">At December 30</p>
       </div>
     </section>
-  </main><header class="topbar">
-  <!-- Single working ☰ button -->
-  <button class="menu-btn" id="menuBtn">&#9776;</button>
-  <div class="logo">Coinify</div>
-</header>
+  </main>
 
-<!-- Side Menu -->
-<nav class="side-menu" id="sideMenu">
-  <button class="close-btn" id="closeBtn">&#10005;</button>
-  <a href="#countdown">Countdown</a>
-  <a href="#how">How Coinify Works?</a>
-</nav>
-
-  <!-- Menu Script -->
+  <!-- Script -->
   <script>
-  const menuBtn = document.getElementById("menuBtn");
-  const closeBtn = document.getElementById("closeBtn");
-  const sideMenu = document.getElementById("sideMenu");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const sideMenu = document.getElementById("sideMenu");
 
-  menuBtn.onclick = () => sideMenu.classList.add("open");
-  closeBtn.onclick = () => sideMenu.classList.remove("open");
+    menuBtn.onclick = () => sideMenu.classList.add("open");
+    closeBtn.onclick = () => sideMenu.classList.remove("open");
   </script>
 </body>
 </html>
