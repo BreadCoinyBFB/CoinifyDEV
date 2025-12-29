@@ -47,12 +47,16 @@ body {
 
 /* Close button */
 .close-btn {
-  background: none;
-  border: none;
-  color: #fff;
+  background: transparent;   /* transparent outer */
+  border: none;              /* no border */
+  color: #fff;               /* white X */
   font-size: 28px;
-  margin-bottom: 20px;
   cursor: pointer;
+  position: absolute;        /* position inside menu */
+  top: 10px;
+  left: 10px;
+  padding: 0;                /* no extra space */
+  line-height: 1;
 }
 
 /* Menu links */
