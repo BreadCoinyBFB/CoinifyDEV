@@ -27,18 +27,26 @@ body {
   .logo {
     font-size: 16px; /* shrink text on mobile */
   }
+
 .menu-btn {
   font-size: 28px;
-  background: transparent;   /* transparent background */
-  border: none;              /* no border */
-  color: #ffffff;               /* white ☰ */
+  background: none;        /* remove background */
+  border: none;            /* remove border */
+  color: #fff;             /* white ☰ */
   cursor: pointer;
   position: fixed;
   top: 15px;
   left: 15px;
   z-index: 1001;
+
+  /* Reset browser defaults */
+  appearance: none;        /* remove default styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0;              /* remove default padding */
+  margin: 0;               /* remove default margin */
+  line-height: 1;          /* tighten spacing */
   }
-}
 
 /* Side menu */
 .side-menu {
