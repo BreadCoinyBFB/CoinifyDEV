@@ -30,12 +30,17 @@ body {
 
 .menu-btn {
   font-size: 28px;
-  color: #fff;             /* white ☰ */
+  color: #fff;
   cursor: pointer;
   position: fixed;
   top: 15px;
   left: 15px;
   z-index: 1001;
+  background: transparent;
+  border: none;
+  display: inline-block;
+  line-height: 1;
+}
 
   /* No background, no border */
   background: transparent;
