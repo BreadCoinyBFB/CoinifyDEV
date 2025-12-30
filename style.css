@@ -42,15 +42,6 @@ body {
   line-height: 1;
 }
 
-  /* No background, no border */
-  background: transparent;
-  border: none;
-
-  /* Ensure it behaves like text, not a button */
-  display: inline-block;
-  line-height: 1;
-}
-
 /* Side menu */
 .side-menu {
   height: 100%;
