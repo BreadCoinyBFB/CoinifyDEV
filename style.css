@@ -11,7 +11,7 @@ body {
 .topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* pushes logo and button apart */
+  justify-content: space-between; /* pushes logo and ☰ apart */
   padding: 14px 18px;
 }
 
