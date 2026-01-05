@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CoinifyDEV</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coinify Developer Release</title>
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 </head>
 <body>
-  <!-- Top Bar -->
-  <header class="topbar">
-    <span class="menu-btn" id="menuBtn">&#9776;</span>
-    <div class="logo">Coinify</div>
-  </header>
+  <h1>Coinify Developer Release</h1>
+  <p>Welcome to Coinify (CoinifyBCB)!</p>
+  <h2>
+    Coinify, also known as "CoinifyBCB", is created by BreadCoinyBFB.  
+    It’s still in Developer Release (Version 0.1). Not a game btw.  
+    Stay tuned for updates!
+  </h2>
+  <h3>Version 0.2</h3>
 
-  <!-- Side Menu -->
-<nav class="side-menu" id="sideMenu">
-  <button class="close-btn" id="closeBtn">&#10005;</button>
+<button id="howcoinifyworks">How Coinify Works</button>
+<button id="countdown">Countdown</button>
 
-  <!-- Replace hash anchors with actual sub pages -->
-  <a class="menu-link" href="howcoinifyworks/index.html">How Coinify Works</a>
-</nav>
-  
-  <!-- Main Content -->
-  <main class="main-content">
-    <section class="hero">
-  <h1>Soon.</h1>
-  <p class="date">At December 30</p>
-    </section>
-  </main>
+<script>
+  // Button 1 → Goes to How Coinify Works page
+  document.getElementById("howcoinifyworks").onclick = function() {
+    window.location.href = "howcoinifyworks/index.html";
+  };
 
-  <!-- Script -->
-  <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const closeBtn = document.getElementById("closeBtn");
-    const sideMenu = document.getElementById("sideMenu");
-
-    menuBtn.onclick = () => sideMenu.classList.add("open");
-    closeBtn.onclick = () => sideMenu.classList.remove("open");
+  // Button 2 → Goes to Test Page
+  document.getElementById("countdown").onclick = function() {
+    window.location.href = "countdown/index.html"; // <– create this folder and index.html later
+  };
   </script>
 </body>
 </html>
