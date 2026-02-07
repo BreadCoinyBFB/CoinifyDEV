@@ -1,242 +1,112 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
-  <title>Top 100 XP Leaderboard</title>  
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"/>  
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top 100 XP Leaderboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="https://github.hubspot.com/odometer/themes/odometer-theme-default.css" />
-<script src="https://github.hubspot.com/odometer/odometer.js"></script>
   
-  <script src="idk"></script>  
-  <style>  
-      body {  
-        margin: 0;  
-        padding: 0;  
-        background-color: #121212;  
-        color: #e0e0e0;  
-        font-family: 'Poppins', sans-serif;  
-        line-height: 1.6;  
-      }  h1 {  
-    text-align: center;  
-    font-size: 2.75rem;  
-    margin: 2rem 0 1.5rem;  
-    color: #ffb300;  
-    text-shadow: 0 0 10px rgba(255, 179, 0, 0.5);  
-  }  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-default.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
 
-  #userList {  
-    max-width: 1000px;  
-    margin: 0 auto;  
-    padding: 0 20px 50px;  
-    display: flex;  
-    flex-direction: column;  
-    gap: 20px;  
-  }  
+  <style>
+    body {
+      margin: 0; padding: 0;
+      background-color: #121212; color: #e0e0e0;
+      font-family: 'Poppins', sans-serif;
+    }
+    h1 { text-align: center; font-size: 2.75rem; margin: 2rem 0; color: #ffb300; }
+    #userList { max-width: 1000px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+    .user-card { display: flex; align-items: center; background: #1e1e1e; padding: 20px; border-radius: 14px; gap: 20px; }
+    .rank { font-size: 2rem; font-weight: 500; width: 60px; text-align: center; color: #ddd; }
+    .rank.gold { color: gold; }
+    .rank.silver { color: silver; }
+    .rank.bronze { color: #cd7f32; }
+    .avatar { width: 72px; height: 72px; border-radius: 50%; border: 3px solid #ffb300; }
+    .user-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .username { font-size: 1.3rem; font-weight: 700; color: #fff; }
+    .odometer { font-size: 1.6rem; color: #ffdd4a; }
+    .progress-container { background: #333; border-radius: 10px; height: 12px; width: 100%; margin-top: 6px; overflow: hidden; }
+    .progress-bar { height: 100%; background: linear-gradient(90deg, #ff8f00, #ffdd4a); transition: width 0.8s ease; }
+    .xp-labels { font-size: 0.9rem; color: #bbb; display: flex; justify-content: space-between; }
+  </style>
+</head>
+<body>
 
-  .user-card {  
-    display: flex;  
-    align-items: center;  
-    background: #1e1e1e;  
-    padding: 20px;  
-    border-radius: 14px;  
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
-    gap: 20px;  
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;  
-  }  
+  <h1>Top 100 XP Leaderboard</h1>
+  <div id="userList"><p id="loadingMsg" style="text-align:center;">Loading Leaderboard...</p></div>
 
-  .user-card:hover {  
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);  
-  }  
+  <script>
+    function formatRank(rank) {
+      let rankClass = '';
+      if (rank === 1) rankClass = 'gold';
+      else if (rank === 2) rankClass = 'silver';
+      else if (rank === 3) rankClass = 'bronze';
+      return `<span class="rank ${rankClass}">#${rank}</span>`;
+    }
 
-  .rank {  
-    font-size: 2rem;  
-    font-weight: 500;  
-    width: 60px;  
-    text-align: center;  
-    color: #ddd;  
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);  
-  }  
+    function getAvatarURL(userId, avatarHash) {
+      if (!avatarHash) return 'https://cdn.discordapp.com/embed/avatars/0.png';
+      const ext = avatarHash.startsWith('a_') ? 'gif' : 'png';
+      return `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${ext}`;
+    }
 
-  .rank.gold {  
-    color: gold;  
-    text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.7);  
-  }  
+    async function fetchAndRender() {
+      const container = document.getElementById('userList');
+      const serverId = '1380740300989010001';
+      
+      // ADDED PROXY TO FIX CORS ERROR
+      const url = `https://corsproxy.io/?${encodeURIComponent('https://api.lurkr.gg/v2/levels/' + serverId)}`;
 
-  .rank.silver {  
-    color: silver;  
-    text-shadow: 1px 1px 4px rgba(192, 192, 192, 0.7);  
-  }  
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        // Lurkr v2 usually nests the array in .levels or .data
+        const users = (data.levels || data.data || data).slice(0, 100);
+        container.innerHTML = '';
 
-  .rank.bronze {  
-    color: #cd7f32;  
-    text-shadow: 1px 1px 4px rgba(205, 127, 50, 0.7);  
-  }  
+        users.forEach((user, index) => {
+          const rank = index + 1;
+          const progress = user.progress || 0;
+          const userId = user.userId;
+          const username = user.user.username;
+          const avatar = user.user.avatar;
 
-  .avatar {  
-    width: 72px;  
-    height: 72px;  
-    border-radius: 50%;  
-    object-fit: cover;  
-    border: 3px solid #ffb300;  
-    box-shadow: 0 0 8px rgba(255, 179, 0, 0.5);  
-  }  
+          const card = document.createElement('div');
+          card.className = 'user-card';
+          card.innerHTML = `
+            ${formatRank(rank)}
+            <img class="avatar" src="${getAvatarURL(userId, avatar)}" alt="${username}" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png';" />
+            <div class="user-info">
+              <div class="username">${username}</div>
+              <div class="odometer" id="xp-${userId}">0</div>
+              <div class="xp-labels">
+                <span>Level ${user.level}</span>
+                <span>${user.xp.toLocaleString()} XP</span>
+              </div>
+              <div class="progress-container">
+                <div class="progress-bar" style="width: 0%"></div>
+              </div>
+            </div>
+          `;
+          container.appendChild(card);
 
-  .user-info {  
-    flex: 1;  
-    display: flex;  
-    flex-direction: column;  
-    gap: 8px;  
-  }  
+          // Animate the XP and Progress bar after a tiny delay
+          setTimeout(() => {
+            const xpEl = document.getElementById(`xp-${userId}`);
+            if (xpEl) xpEl.innerHTML = user.xp;
+            card.querySelector('.progress-bar').style.width = progress + '%';
+          }, 100);
+        });
+      } catch (err) {
+        container.innerHTML = `<p style="text-align:center; color:red;">Failed to load data. Make sure the Server ID is correct and leveling is public.</p>`;
+        console.error(err);
+      }
+    }
 
-  .username {  
-    font-size: 1.3rem;  
-    font-weight: 700;  
-    color: #fff;  
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);  
-  }  
-
-  .odometer {  
-    font-size: 1.6rem;  
-    color: #ffdd4a;  
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);  
-  }  
-
-  .progress-container {  
-    background: #333;  
-    border-radius: 10px;  
-    overflow: hidden;  
-    height: 12px;  
-    width: 100%;  
-    margin-top: 6px;  
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);  
-  }  
-
-  .progress-bar {  
-    height: 100%;  
-    background: linear-gradient(90deg, #ff8f00, #ffdd4a);  
-    transition: width 0.3s ease-out;  
-  }  
-
-  .xp-labels {  
-    font-size: 0.9rem;  
-    color: #bbb;  
-    display: flex;  
-    justify-content: space-between;  
-  }  
-
-  #loadingMsg {  
-    text-align: center;  
-    color: #999;  
-    font-size: 1.2rem;  
-    padding: 2rem;  
-    font-style: italic;  
-  }  
-
-  @media (max-width: 600px) {  
-    h1 {  
-      font-size: 2rem;  
-    }  
-
-    .user-card {  
-      flex-direction: column;  
-      align-items: flex-start;  
-      padding: 15px;  
-    }  
-
-    .rank {  
-      width: auto;  
-      font-size: 1.5rem;  
-      margin-bottom: 10px;  
-    }  
-
-    .avatar {  
-      width: 60px;  
-      height: 60px;  
-    }  
-
-    .odometer {  
-      font-size: 1.4rem;  
-    }  
-
-    .xp-labels {  
-      font-size: 0.8rem;  
-    }  
-  }  
-</style>
-
-</head>  
-<body>  
-  <h1>Top 100 XP Leaderboard</h1>  
-  <div id="userList"><p id="loadingMsg">Loading...</p></div>    <script>  
-    function formatRank(rank) {  
-      let rankClass = '';  
-      if (rank === 1) rankClass = 'gold';  
-      else if (rank === 2) rankClass = 'silver';  
-      else if (rank === 3) rankClass = 'bronze';  
-      return `<span class="rank ${rankClass}">#${rank}</span>`;  
-    }  
-  
-    function getAvatarURL(userId, avatarHash) {  
-      if (!avatarHash) return './default.png';  
-      const isGif = avatarHash.startsWith('a_');  
-      const ext = isGif ? 'gif' : 'png';  
-      return `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${ext}`;  
-    }  
-  
-    async function fetchAndRender() {  
-      const container = document.getElementById('userList');  
-      const loading = document.getElementById('loadingMsg');  
-  
-      try {  
-const res = await fetch('https://api.lurkr.gg/v2/levels/1380740300989010001');
-  
-        const data = await res.json();  
-        const users = data.levels.slice(0, 100);  
-        container.innerHTML = '';  
-  
-        users.forEach((user, index) => {  
-          const rank = user.rank;  
-          const progress = user.progress || 0;  
-          const xp = user.xp;  
-          const nextLevelXP = user.nextLevelXp;  
-          const avatar = user.user.avatar;  
-          const userId = user.userId;  
-          const username = user.user.username;  
-  
-          const card = document.createElement('div');  
-          card.className = 'user-card';  
-          card.innerHTML = `  
-            ${formatRank(rank)}  
-            <img class="avatar" src="${getAvatarURL(userId, avatar)}" alt="${username}" onerror="this.src='./default.png';" />  
-            <div class="user-info">  
-              <div class="username">${username}</div>  
-              <div class="odometer" id="xp-${userId}">0</div>  
-              <div class="xp-labels">  
-                <span>Level ${user.level}</span>  
-                <span>${(nextLevelXP * progress / 100).toLocaleString()} / ${nextLevelXP.toLocaleString()} XP</span>  
-              </div>  
-              <div class="progress-container">  
-                <div class="progress-bar" style="width: ${progress.toFixed(2)}%"></div>  
-              </div>  
-            </div>  
-          `;  
-          container.appendChild(card);  
-        });  
-  
-        setTimeout(() => {  
-          users.forEach(user => {  
-            const xpEl = document.getElementById(`xp-${user.userId}`);  
-            if (xpEl) xpEl.innerHTML = user.xp.toLocaleString();  
-          });  
-        }, 300);  
-      } catch (err) {  
-        console.error('Failed to fetch Lurkr data:', err);  
-        loading.innerText = 'Failed to load leaderboard.';  
-      }  
-    }  
-  
-    fetchAndRender();  
-    setInterval(fetchAndRender, 60000);  
-  </script>  </body>  
+    fetchAndRender();
+  </script>
+</body>
 </html>
