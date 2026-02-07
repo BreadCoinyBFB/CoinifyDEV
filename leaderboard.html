@@ -1,12 +1,12 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Top 100 XP Leaderboard</title>
+  
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-default.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"></script>
 
@@ -17,41 +17,57 @@
       font-family: 'Poppins', sans-serif;
     }
     h1 { text-align: center; font-size: 2.75rem; margin: 2rem 0; color: #ffb300; }
-    #userList { max-width: 1000px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
-    .user-card { display: flex; align-items: center; background: #1e1e1e; padding: 20px; border-radius: 14px; gap: 20px; }
+    
+    /* Layout for the cards */
+    #userList { 
+      max-width: 1000px; 
+      margin: 0 auto; 
+      padding: 20px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 20px; 
+    }
+
+    .user-card { 
+      display: flex; 
+      align-items: center; 
+      background: #1e1e1e; 
+      padding: 20px; 
+      border-radius: 14px; 
+      gap: 20px; 
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
     .rank { font-size: 2rem; font-weight: 500; width: 60px; text-align: center; color: #ddd; }
     .rank.gold { color: gold; }
     .rank.silver { color: silver; }
     .rank.bronze { color: #cd7f32; }
-    .avatar { width: 72px; height: 72px; border-radius: 50%; border: 3px solid #ffb300; }
+
+    .avatar { 
+      width: 72px; 
+      height: 72px; 
+      border-radius: 50%; 
+      border: 3px solid #ffb300; 
+      object-fit: cover;
+    }
+
     .user-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
     .username { font-size: 1.3rem; font-weight: 700; color: #fff; }
     .odometer { font-size: 1.6rem; color: #ffdd4a; }
+
     .progress-container { background: #333; border-radius: 10px; height: 12px; width: 100%; margin-top: 6px; overflow: hidden; }
-    .progress-bar { height: 100%; background: linear-gradient(90deg, #ff8f00, #ffdd4a); transition: width 0.8s ease; }
+    .progress-bar { height: 100%; background: linear-gradient(90deg, #ff8f00, #ffdd4a); transition: width 1s ease-in-out; }
+    
     .xp-labels { font-size: 0.9rem; color: #bbb; display: flex; justify-content: space-between; }
-     <div class="leaderboard-container">
-    .leaderboard-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    border: 2px solid #ffb300;
-    border-radius: 15px;
-    overflow: hidden; /* Clips the corners of the iframe to match the border */
-  }
   </style>
 </head>
 <body>
 
   <h1>Top 100 XP Leaderboard</h1>
-  <div id="userList"><p id="loadingMsg" style="text-align:center;">Loading Leaderboard...</p></div>
-   <div class="leaderboard-container">
-  <iframe 
-    src="https://lurkr.gg/levels/1380740300989010001" 
-    width="100%" 
-    height="800px" 
-    frameborder="0">
-  </iframe>
-   </div>
+  
+  <div id="userList">
+    <p id="loadingMsg" style="text-align:center;">Loading Leaderboard...</p>
+  </div>
 
   <script>
     function formatRank(rank) {
@@ -72,15 +88,17 @@
       const container = document.getElementById('userList');
       const serverId = '1380740300989010001';
       
-      // ADDED PROXY TO FIX CORS ERROR
-      const url = `https://corsproxy.io/?${encodeURIComponent('https://api.lurkr.gg/v2/levels/' + serverId)}`;
+      // We use the proxy here to prevent the "Blocked" error
+      const apiUrl = `https://api.lurkr.gg/v2/levels/${serverId}`;
+      const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
 
       try {
-        const res = await fetch('https://api.lurkr.gg/v2/levels/1380740300989010001');
-        const data = await res.json();
+        const res = await fetch(proxyUrl);
+        if (!res.ok) throw new Error("API Response Error");
         
-        // Lurkr v2 usually nests the array in .levels or .data
-        const users = (data.levels || data.data || data).slice(0, 100);
+        const data = await res.json();
+        const users = (data.levels || data.data || []).slice(0, 100);
+        
         container.innerHTML = '';
 
         users.forEach((user, index) => {
@@ -109,16 +127,17 @@
           `;
           container.appendChild(card);
 
-          // Animate the XP and Progress bar after a tiny delay
+          // Trigger animations
           setTimeout(() => {
             const xpEl = document.getElementById(`xp-${userId}`);
             if (xpEl) xpEl.innerHTML = user.xp;
             card.querySelector('.progress-bar').style.width = progress + '%';
-          }, 100);
+          }, 200);
         });
+
       } catch (err) {
-        container.innerHTML = `<p style="text-align:center; color:red;">Failed to load data. Make sure the Server ID is correct and leveling is public.</p>`;
-        console.error(err);
+        container.innerHTML = `<p style="text-align:center; color:#ff4444;">Failed to load data. Ensure your Lurkr leaderboard is set to "Public".</p>`;
+        console.error("Fetch error:", err);
       }
     }
 
