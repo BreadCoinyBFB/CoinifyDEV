@@ -189,7 +189,7 @@
       const loading = document.getElementById('loadingMsg');  
   
       try {  
-        const res = await fetch('[idk]');  
+const res = await fetch('https://api.lurkr.gg/v2/levels/1380740300989010001');
   
         const data = await res.json();  
         const users = data.levels.slice(0, 100);  
