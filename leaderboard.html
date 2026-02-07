@@ -60,7 +60,7 @@
       const url = `https://corsproxy.io/?${encodeURIComponent('https://api.lurkr.gg/v2/levels/' + serverId)}`;
 
       try {
-        const res = await fetch(url);
+        const res = await fetch('https://api.lurkr.gg/v2/levels/1380740300989010001');
         const data = await res.json();
         
         // Lurkr v2 usually nests the array in .levels or .data
