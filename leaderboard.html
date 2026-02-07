@@ -30,12 +30,28 @@
     .progress-container { background: #333; border-radius: 10px; height: 12px; width: 100%; margin-top: 6px; overflow: hidden; }
     .progress-bar { height: 100%; background: linear-gradient(90deg, #ff8f00, #ffdd4a); transition: width 0.8s ease; }
     .xp-labels { font-size: 0.9rem; color: #bbb; display: flex; justify-content: space-between; }
+     <div class="leaderboard-container">
+    .leaderboard-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    border: 2px solid #ffb300;
+    border-radius: 15px;
+    overflow: hidden; /* Clips the corners of the iframe to match the border */
+  }
   </style>
 </head>
 <body>
 
   <h1>Top 100 XP Leaderboard</h1>
   <div id="userList"><p id="loadingMsg" style="text-align:center;">Loading Leaderboard...</p></div>
+   <div class="leaderboard-container">
+  <iframe 
+    src="https://lurkr.gg/levels/1380740300989010001" 
+    width="100%" 
+    height="800px" 
+    frameborder="0">
+  </iframe>
+   </div>
 
   <script>
     function formatRank(rank) {
